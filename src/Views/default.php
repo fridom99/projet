@@ -25,17 +25,18 @@
 
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav ms-auto">
-                    <?php if (App\Controllers\ConnexionController::logged_user()) : ?>
+                    
                         <li class="nav-item">
                             <a class="nav-link" href="<?= BASE_URL; ?>lessons">Leçons</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="<?= BASE_URL; ?>categories">Catégories</a>
                         </li>
-
+                        <?php if (App\Controllers\ConnexionController::logged_user()) : ?>
                         <li class="nav-item">
                             <a class="nav-link" href="<?= BASE_URL; ?>users/profil/<?= $_SESSION['user']['id']; ?>">Mon compte</a>
                         </li>
+                        
                     <?php endif; ?>
                     <li class="nav-item">
                         <?php if (App\Controllers\ConnexionController::logged_user()) : ?>
