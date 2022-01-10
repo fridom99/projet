@@ -18,7 +18,7 @@
                 <td><a href="lessons/show/<?= $lesson['id']; ?>"><?= $lesson['libelle']; ?></a></td>
                 <td><?= $lesson['id_categorie']; ?></td>
                 <td><?= $lesson['format']; ?></td>
-                <td><a href="assets/support/<?= nl2br(htmlspecialchars($lesson['lien'])) ?>"><?= $lesson['lien']; ?></a></td>
+                <td><?= $lesson['lien']; ?></td>
                 <td><?= $lesson['date']; ?></td>
                 <td><?= $lesson['statut']; ?></td>
 

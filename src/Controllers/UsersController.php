@@ -17,15 +17,16 @@ class UsersController extends Controller {
         // } else {
         //     $id = $param[0];
         // }
-
+        // if(!ConnexionController::logged_user()) { $this->redirect('login'); }
         /** Sous la forme ternaire */
-        if(!ConnexionController::logged_user()) { $this->redirect('login'); }
+
         $id = empty($id) ? $_SESSION['user']['id'] : $id;
 
         $model = new UsersModel();
         $result = $model->find($id);
         $user=$result->fetch(PDO::FETCH_ASSOC);
-
+        
+            // Si une modification du profil est demandée
         if($_SERVER['REQUEST_METHOD']=='POST') {
             
             extract($_POST);
@@ -62,10 +63,18 @@ class UsersController extends Controller {
                 FlashController::addFlash("Le profil a été mis à jour", 'success');
             }
         }
-        
+
+        // Si le mec est le meme
+        if ($id == $_SESSION['user']['id'])
+        {
         $this->render('users/profil', array(
             'user' => $user,
         ));
+        }
+        // sinon rediriger sur accueil
+        else {
+            $this->redirect('home');
+        }
     }
 
 
