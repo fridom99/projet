@@ -20,6 +20,7 @@ class UsersController extends Controller {
         // if(!ConnexionController::logged_user()) { $this->redirect('login'); }
         /** Sous la forme ternaire */
 
+        // Si pas d'id profil, alors on lui en met un
         $id = empty($id) ? $_SESSION['user']['id'] : $id;
 
         $model = new UsersModel();
@@ -28,7 +29,7 @@ class UsersController extends Controller {
         
             // Si une modification du profil est demandée
         if($_SERVER['REQUEST_METHOD']=='POST') {
-            
+            // Test si les champs sont remplis
             extract($_POST);
 
             if(empty($nom)) { FlashController::addFlash("Le nom est obligatoire", 'danger'); }
@@ -44,11 +45,11 @@ class UsersController extends Controller {
                 if(!preg_match('%[!#@$\%_]%', $password)) { FlashController::addFlash("Le mot de passe doit contenir au moins un des caractères suivants : ! # @ $ % _", 'danger');}
 
                 if($password != $password2) { FlashController::addFlash("Les mots de passe ne correspondent pas", 'danger');}
-
+                // Si le champs sont bons on met le nouveau password
             } else {
                 $password = $user['password'];
             }
-
+                // Si il n'y a pas de message d'erreur, on update
             if(empty($_SESSION['messages'])) {
 
                 $model->updateUser(array(
@@ -61,12 +62,17 @@ class UsersController extends Controller {
                 $user['prenom']    = $prenom;
 
                 FlashController::addFlash("Le profil a été mis à jour", 'success');
+                $this->redirect('home');
             }
         }
 
-        // Si le mec est le meme
+        // Si le mec est le meme on affiche son profil
         if ($id == $_SESSION['user']['id'])
         {
+            // on attribue le role de la session
+            $_SESSION['user']['role'] = $user['role'];
+            $_SESSION['user']['categorie'] = $user['categorie'];
+            // on affiche la page profil avec la variable $user
         $this->render('users/profil', array(
             'user' => $user,
         ));

@@ -1,2 +1,1 @@
-<h2>Page d'accueil</h2>
-<?php var_dump(__METHOD__); ?>
+<div class="accueil"><h2>Page d'accueil</h2></div>

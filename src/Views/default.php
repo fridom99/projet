@@ -19,6 +19,13 @@
     <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
         <div class="container-fluid">
             <a class="navbar-brand" href="<?= BASE_URL; ?>">Philliance Formation</a>
+            <?php if (App\Controllers\ConnexionController::logged_user()) : ?>
+                <!-- <button type="button" class="btn btn-danger btn-role"><strong><?= !empty($user['role']) ? $_SESSION['role'] = $user['role'] : $_SESSION['role']; ?></strong></button> -->
+                <button type="button" class="btn btn-danger btn-role"><strong><?= $_SESSION['user']['role'] ?></strong></button>
+                <!-- <button type="button" class="btn btn-warning btn-role">Catégorie de leçon à afficher :<strong><?= $_SESSION['user']['categorie'] ?></strong></button> -->
+                
+
+            <?php endif; ?>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -26,25 +33,29 @@
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav ms-auto">
                     
+                <?php if (App\Controllers\ConnexionController::logged_user()) : ?>
                         <li class="nav-item">
                             <a class="nav-link" href="<?= BASE_URL; ?>lessons">Leçons</a>
                         </li>
+                        <?php endif; ?>
+                        <?php if (App\Controllers\ConnexionController::logged_user("admin")) : ?>
                         <li class="nav-item">
                             <a class="nav-link" href="<?= BASE_URL; ?>categories">Catégories</a>
                         </li>
+                        <?php endif; ?>
                         <?php if (App\Controllers\ConnexionController::logged_user()) : ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= BASE_URL; ?>users/profil/<?= $_SESSION['user']['id']; ?>">Mon compte</a>
+                            <a class="nav-link" href="<?= BASE_URL; ?>users/profil/<?= $_SESSION['user']['id']; ?>"><i class="fas fa-id-card fa-1x"></i></a>
                         </li>
-                        
-                    <?php endif; ?>
-                    <li class="nav-item">
+                        <?php endif; ?>
                         <?php if (App\Controllers\ConnexionController::logged_user()) : ?>
+                        <li class="nav-item">
+
                             <a class="nav-link" href="<?= BASE_URL; ?>logout">Déconnexion</a>
                         <?php else : ?>
-                            <a class="nav-link" href="<?= BASE_URL; ?>login"><i class="far fa-user 3x"></i> | Connexion</a>
+                            <a class="nav-link" href="<?= BASE_URL; ?>login"><i class="far fa-user fa-1x"></i> | Connexion</a>
                         <?php endif; ?>
-                    </li>
+                        </li>
 
                 </ul>
             </div>
@@ -60,28 +71,29 @@
     }
         ?>
 
-        <div class="container main">
+        <div class="container-fluid main">
 
 
             <?= $content; ?>
 
         </div>
 
-        <footer>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-primary footer">
+        <div class="container-fluid footer">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
                 <p>© 2022 Philliance l All rights reserved.</p>
                 <ul class="navbar-nav ms-auto">
-                <li class="nav-item navbar-brand">
-                <a href="<?= BASE_URL; ?>home/conditionsUtilisation">Conditions utilisations</a>
-                </li>
-                <li class="nav-item navbar-brand">|
-                <a href="<?= BASE_URL; ?>home/faq">FAQ</a>
-                </li>
-                <li class="nav-item navbar-brand">|
-                <a href="<?= BASE_URL; ?>home/contact">Contactez-nous</a>
-                </li>
-</ul>
+                    <li class="nav-item navbar-brand">
+                        <a class="nav-link" href="<?= BASE_URL; ?>home/conditionsUtilisation">Conditions utilisations</a>
+                    </li>
+                    <li class="nav-item navbar-brand">
+                        <a class="nav-link" href="<?= BASE_URL; ?>home/faq">FAQ</a>
+                    </li>
+                    <li class="nav-item navbar-brand">
+                        <a class="nav-link" href="<?= BASE_URL; ?>home/contact">Contactez-nous</a>
+                    </li>
+                </ul>
             </nav>
+        </div>
         </footer>
 
 </body>

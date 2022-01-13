@@ -22,7 +22,7 @@ use Symfony\Component\Yaml\Yaml;
 require './vendor/autoload.php';
 
 define('ROOT', __DIR__);
-define('BASE_URL', 'http://localhost/site/damien3/');
+define('BASE_URL', 'http://localhost/site/dominique/');
 
 
 /** trim() : supprimme les caractères `/` au début et à la fin du paramètre passé dans l'url */

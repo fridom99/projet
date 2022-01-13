@@ -24,7 +24,9 @@ class ConnexionController extends Controller {
                         'id'    =>  $users[0]['id'],
                         'role'  =>  $user[0]['role'],
                     );
+                    
                     $this->redirect('users/profil');
+                    
                 }
             }
         }
@@ -37,10 +39,12 @@ class ConnexionController extends Controller {
     
     public function logout() {
         unset($_SESSION['user']);
+        unset($_SESSION['role']);
         $this->redirect('login');
     }
 
     public static function logged_user(string $role='') {
+        // Si le mec est connecté
         if( isset($_SESSION['user']['id'])) {
             if( empty($role)) {
                 return true;

@@ -30,4 +30,10 @@ class LessonsModel extends Model  {
         return $this->request($sql, $data );
     }
 
+    public function afficheLecon($catégorie1, $catégorie2 ="0", $catégorie3 ="0") {
+        $sql = "SELECT * FROM {$this->table} where id_categorie = $catégorie1 or $catégorie2 or $catégorie3";
+        // return $this->getInstance()->query($sql);
+        return $this->request($sql);
+    }
+
 }
