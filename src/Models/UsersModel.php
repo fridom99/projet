@@ -9,7 +9,7 @@ class UsersModel extends Model {
         $sql = "SELECT * FROM users WHERE username = :username AND password = :password";
         return $this->request($sql, array(
             'username' => $username,
-            'password' => $password,
+            'password' => $password
         ));
     }
 

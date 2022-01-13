@@ -17,7 +17,7 @@ class LessonsController extends Controller {
 
         /** Demande le model permettant de traiter les requêtes SQL relatives aux lessons */
         $model      =   new LessonsModel();
-        $result     =   $model->findAll();
+        $result     =   $model->afficheLecon($_SESSION['user']['categorie'],"2");
         $lessons    =   $result->fetchAll();
 
         /** 
